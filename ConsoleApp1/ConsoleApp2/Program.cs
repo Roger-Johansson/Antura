@@ -22,14 +22,15 @@ namespace ConsoleApp2
         //static readonly string rootFolder = @ "C:\Temp\Data\";
         //Default file. MAKE SURE TO CHANGE THIS LOCATION AND FILE PATH TO YOUR FILE  
 
-        static readonly string textFile = "European languages are.txt";
+        //static readonly string textFile = "European languages are.txt";
         static int Main(string[] args)
         {
             // Test if input arguments were supplied:
             if (args.Length == 0)
             {
                 System.Console.WriteLine("Please enter a file name.");
-                System.Console.WriteLine("Example usage: ConsoleApp1 myfile.txt");
+                System.Console.WriteLine("Example usage 1: ConsoleApp1 myfile.txt");
+                System.Console.WriteLine("Example usage 2: ConsoleApp1 \"my file.txt\"");
                 Console.WriteLine("Press any key to exit");
                 Console.ReadKey();
             }
@@ -49,11 +50,11 @@ namespace ConsoleApp2
             //        Console.WriteLine(line);
             //}
 
-            if (File.Exists(textFile))
+            if (File.Exists(args[0]))
             {
                 // Read a text file line by line. 
-                string lines = File.ReadAllText(textFile);
-                string searchterm = Path.GetFileNameWithoutExtension(textFile);
+                string lines = File.ReadAllText(args[0]);
+                string searchterm = Path.GetFileNameWithoutExtension(args[0]);
                 int count = Regex.Matches(lines, searchterm).Count;
                 Console.WriteLine(count);
             }
