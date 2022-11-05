@@ -17,89 +17,41 @@ namespace ConsoleApp2
     internal class Program
 
     {
-
-        // Default folder   
-        //static readonly string rootFolder = @ "C:\Temp\Data\";
-        //Default file. MAKE SURE TO CHANGE THIS LOCATION AND FILE PATH TO YOUR FILE  
-
-        //static readonly string textFile = "European languages are.txt";
+        /*
+         This program counts the occurences of a given text file name in the given text file contents.
+         Example: searches the myFile.txt for occurences of myFile.
+         Written by: Roger Johansson
+         2022-11-06
+        */
         static int Main(string[] args)
         {
-            // Test if input arguments were supplied:
+            // Check if an input argument was given
             if (args.Length == 0)
             {
                 System.Console.WriteLine("Please enter a file name.");
                 System.Console.WriteLine("Example usage 1: ConsoleApp1 myfile.txt");
                 System.Console.WriteLine("Example usage 2: ConsoleApp1 \"my file.txt\"");
-                Console.WriteLine("Press any key to exit");
-                Console.ReadKey();
+                System.Console.WriteLine("NOTE! Place text file in the same folder as ConsoleApp.exe.");
+                return 1;
             }
-            //if (File.Exists(textFile))
-            //{
-
-            //    // Read entire text file content in one string
-            //    string text = File.ReadAllText(textFile);
-            //    Console.WriteLine(text);
-            //}
-
-            //if (File.Exists(textFile))
-            //{
-            //    // Read a text file line by line. 
-            //    string[] lines = File.ReadAllLines(textFile);
-            //    foreach (string line in lines)
-            //        Console.WriteLine(line);
-            //}
-
-            if (File.Exists(args[0]))
+  
+            // Check if given argument is an existing file name
+            if (args.Length != 0 && !File.Exists(args[0]))
             {
-                // Read a text file line by line. 
-                string lines = File.ReadAllText(args[0]);
-                string searchterm = Path.GetFileNameWithoutExtension(args[0]);
-                int count = Regex.Matches(lines, searchterm).Count;
-                Console.WriteLine(count);
+                System.Console.WriteLine("Please enter a valid file name.");
+                System.Console.WriteLine("NOTE! Place text file in the same folder as ConsoleApp.exe.");
+                return 1;
             }
-
-            //if (File.Exists(textFile))
-            //{
-            //    // Read a text file line by line. 
-            //    string text = File.ReadAllText(textFile);
-            //    string searchTerm = "European";
-
-            //    //Convert the string into an array of words  
-            //    string[] source = text.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            //    // Create the query.  Use the InvariantCultureIgnoreCase comparision to match "data" and "Data"
-            //    var matchQuery = from word in source
-            //                     where word.Equals(searchTerm, StringComparison.InvariantCultureIgnoreCase)
-            //                     select word;
-
-            //    // Count the matches, which executes the query.  
-            //    int wordCount = matchQuery.Count();
-            //    Console.WriteLine("{0} occurrences(s) of the search term \"{1}\" were found.", wordCount, searchTerm);
-
-            //    // Keep console window open in debug mode  
-            //    Console.WriteLine("Press any key to exit");
-            //    Console.ReadKey();
-            //}
-
-            //if (File.Exists(textFile))
-            //{
-            //    // Read file using StreamReader. Reads file line by line 
-            //    using StreamReader file = new(textFile);
-            //    int counter = 0;
-            //    string ln;
-            //    while ((ln = file.ReadLine()) != null)
-            //    {
-            //        Console.WriteLine(ln);
-            //        counter++;
-            //    }
-
-            //    file.Close();
-            //    Console.WriteLine($"File has {counter} lines.");
-            //}
+            
+            // Read a text file, count instances of filename in the file contents, and present result
+            string text = File.ReadAllText(args[0]);
+            string searchterm = Path.GetFileNameWithoutExtension(args[0]);
+            int count = Regex.Matches(text, searchterm).Count;
+            Console.WriteLine($"The file {searchterm}.txt contains {count} instances of {searchterm}.");
+            Console.WriteLine("Press any key to exit");
+            // wait for user key press
             Console.ReadKey();
             
-
             return 0;
         }
     }

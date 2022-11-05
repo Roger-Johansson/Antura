@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleApp2": {
       "commandName": "Project",
-      "commandLineArgs": "European.txt"
+      "commandLineArgs": "empty.txt"
     }
   }
 }
