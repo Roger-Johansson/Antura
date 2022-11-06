@@ -1,7 +1,4 @@
-﻿//Count words in empty file.
-
-//Count words in file without spaces between words.
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
